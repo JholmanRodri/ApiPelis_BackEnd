@@ -1,0 +1,11 @@
+{
+    "titulo":"Cars",
+    "subtitulo":"Rayo mcuin",
+    "genero":"caricaturas",
+    "descripcion":"Se trata de el rasho macuin",
+    "duracion":"1hora y media",
+    "imagen":"url",
+    "reparto":[
+        {"nombre":"marco1","apodo":"Rayo mcuin1"   
+    ]
+}
