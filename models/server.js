@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import bdconectar from "../Database/Config.js";
+import { bdconectar } from "../Database/Config.js";
 import peliculas from "../routes/peliculas.js";
 import usuarios from "../routes/usuarios.js";
 import favoritos from "../routes/favoritos.js";
@@ -27,15 +27,19 @@ class Servidor {
     }))
   }
   async conectarbd() {
-    await bdconectar();
+    await bdconectar()
   }
+ 
   routes(){
       this.app.use("/api/peliculas",peliculas);
       this.app.use("/api/usuarios",usuarios);
       this.app.use("/api/favoritos",favoritos);
       this.app.use("/api/actores",actores);
-      this.app.use("/api/comentarios",comentarios)
+      this.app.use("/api/comentarios",comentarios);
   }
+  // var server = app.listen(process.env.PORT || 5000), function() {
+  //   var port = server.address().port;
+  //   console.log("Express is working on port " + port);
   escuchar(){
       this.app.listen(this.port,() =>{
           console.log(`Servidor escuchando por el puerto ${this.port}`);

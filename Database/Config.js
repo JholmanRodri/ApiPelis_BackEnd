@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const bdconectar=async()=>{
+const bdconectar= async()=>{
     try {
         await mongoose.connect(process.env.MONGOBD_CNX);
         console.log("Base de datos online");
@@ -9,4 +9,4 @@ const bdconectar=async()=>{
     }
     
 }
-export default bdconectar
+export {bdconectar}
