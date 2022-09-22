@@ -5,5 +5,5 @@ const ComentarioSchema= new mongoose.Schema({
     pelicula:{type:mongoose.Schema.ObjectId,ref:"Pelicula",required:true},
     comentario:{type:String,required:true}
 })
-
+ 
 export default mongoose.model("Comentario",ComentarioSchema)

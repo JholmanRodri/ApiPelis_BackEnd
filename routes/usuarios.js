@@ -1,5 +1,5 @@
 import {Router} from "express"
-import {mostrarFoto, usuarioGetListarid, usuarioGetListarNombreOEmail, usuarioGetListarTodos, usuarioLogin,usuarioPost, usuarioPutActivar, usuarioPutdatos, usuarioPutDesactivar, usuarioPutFoto,} from "../controllers/usuarios.js"
+import {mostrarFoto,usuarioPutRol, usuarioGetListarid, usuarioGetListarNombreOEmail, usuarioGetListarTodos, usuarioLogin,usuarioPost, usuarioPutActivar, usuarioPutdatos, usuarioPutDesactivar, usuarioPutFoto,} from "../controllers/usuarios.js"
 import { check } from "express-validator";
 import HerlpersUsuario from "../helpers/usuarios.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
@@ -58,12 +58,6 @@ router.put("/datos/:id",[
     validarCampos
 ],usuarioPutdatos)
 
-router.put("/activar/:id",[
-    validarJWT,
-    check('id').isMongoId(),
-    validarCampos
-],usuarioPutActivar)
-
 router.get("/upload/:id",[
     validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
@@ -71,10 +65,22 @@ router.get("/upload/:id",[
     validarCampos   
 ],mostrarFoto)
 
+router.put("/activar/:id",[
+    validarJWT,
+    check('id').isMongoId(),
+    validarCampos
+],usuarioPutActivar)
+
 router.put("/desactivar/:id",[
     validarJWT,
     check('id').isMongoId(),
     validarCampos
 ],usuarioPutDesactivar)
+
+router.put("/rol/:id",[
+    validarJWT,
+    check('rol',"el rol es requerido").not().isEmpty(),
+    check('rol').isMongoId(),
+],usuarioPutRol)
 export default router;
 

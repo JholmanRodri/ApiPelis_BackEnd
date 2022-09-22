@@ -1,6 +1,6 @@
 import {Router}from "express";
 import { check } from "express-validator";
-import {comentarioPost,comentarioGet, comentariogetBuscar, comentarioGetBuscarid, comentarioEliminar, comentarioGetComentarioUsuario, comentarioGetComentarioPelicula} from "../controllers/comentarios.js"
+import {comentarioPost,comentarioGet,comentarioPut,comentariogetBuscar, comentarioGetBuscarid, comentarioEliminar, comentarioGetComentarioUsuario, comentarioGetComentarioPelicula} from "../controllers/comentarios.js"
 import HelperComentario from "../helpers/comentarios.js";
 import HelpersPeliculas from "../helpers/peliculas.js";
 import HerlpersUsuario from "../helpers/usuarios.js";
@@ -46,11 +46,16 @@ router.get("/ComenUsuario/:id",[
 ],comentarioGetComentarioUsuario)
 
 router.get("/ComenPelicula/:id",[
-    validarJWT,
     check('id').isMongoId(),
     check('id').custom(HelpersPeliculas.existePeliculaById),
     validarCampos
 ],comentarioGetComentarioPelicula)
+
+router.put("/editar/:id",[
+    validarJWT,
+    check('id').isMongoId(),
+    check('comentario',"el comentario es requerido").not().isEmpty(),
+],comentarioPut)
 export default router;
 
 

@@ -8,8 +8,6 @@ import actores from "../routes/actores.js";
 import comentarios from "../routes/comentarios.js";
 import fileUpload from "express-fileupload";
 
-
-
 class Servidor {
   constructor() {
     this.app = express();

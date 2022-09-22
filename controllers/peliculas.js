@@ -38,7 +38,43 @@ const PeliculaPut=async(req,res)=>{
 //         "msg":'Actualizacion realizada con exito'
 //     })
 // }
-const PeliculaPutFoto= async (req, res) => {
+
+const  PeliculaPutFoto= async (req, res) => {
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_NAME,
+        api_key: process.env.CLOUDINARY_KEY,
+        api_secret: process.env.CLOUDINARY_SECRET,
+        secure: true
+    });
+
+    const { id } = req.params;
+    try {
+        //subir archivo
+        const { tempFilePath } = req.files.archivo
+        cloudinary.uploader.upload(tempFilePath,
+            { width: 250, crop: "limit" },
+            async function (error, result) {
+                if (result) {   
+                    let pelicula = await Pelicula.findById(id);
+                    if (pelicula.imagen) {
+                        const nombreTemp = pelicula.imagen.split('/')
+                        const nombreArchivo = nombreTemp[nombreTemp.length - 1] // hgbkoyinhx9ahaqmpcwl jpg
+                        const [public_id] = nombreArchivo.split('.')
+                        cloudinary.uploader.destroy(public_id)
+                    }
+                    pelicula = await Pelicula.findByIdAndUpdate(id, { imagen: result.url })
+                    //responder
+                    res.json({ url: result.url });
+                } else {
+                    res.json(error)
+                }
+            })
+    } catch (error) {
+        res.status(400).json({ error, 'general': 'Controlador' })
+    }
+}
+
+const PeliculaPutFotovieja= async (req, res) => {
     const { id } = req.params;
     try {
         let nombre
@@ -97,6 +133,7 @@ const PeliculaGetBuscar=async(req,res)=>{
     const {titulo}=req.query
     const pelicula = await Pelicula.find(
         //{nombre:new RegExp(query,"i")}
+        
         {
             $or: [
                 //Viene del modelo // viene de query

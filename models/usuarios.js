@@ -4,7 +4,10 @@ const UsuarioSchema= new mongoose.Schema({
     email:{type:String,required:true,unique:true},
     password:{type:String,required:true,minlength:6},
     estado:{type:Number,default:1},
-    imagen:{type:String}
+    imagen:{type:String},
+    rol:{type:String,default:"usuario"}
+    //
+
 })
 
 export default mongoose.model("Usuario",UsuarioSchema)

@@ -103,7 +103,7 @@ const actorGetBuscar=async(req,res)=>{
         actor
     })
 }
-
+    
 // listar por id
 const actorGetBuscarid=async(req,res)=>{
     const {id}=req.params

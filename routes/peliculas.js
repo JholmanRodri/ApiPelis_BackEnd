@@ -73,7 +73,6 @@ router.get("/buscarid/:id",[
     validarCampos
 ],usuarioGetActoresPelicula)
 
-
 router.get("/buscar",[
     check('titulo',"El titulo es obligatorio")
 ],PeliculaGetBuscar)
@@ -83,12 +82,11 @@ router.get("/pelicula/:id",[
     validarCampos
 ],PeliculaGetBuscarId)
     
-router.delete("/borar/:id",[
+router.delete("/borrar/:id",[
     validarJWT,
     check('id').custom(HelpersPeliculas.existePeliculaById), 
     check('id').isMongoId(),
     validarCampos
 ],peliculaEliminar)
-
 
 export default router;

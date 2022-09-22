@@ -153,7 +153,15 @@ const usuarioPutdatos=async(req,res)=>{
         "msg":'Actualizacion realizada con exito'
     })
 }
-
+const usuarioPutRol=async(req,res)=>{
+    const {id}=req.params
+    const {rol}=req.body
+    const UsuarioEditarDatos=await Usuario.findByIdAndUpdate(id,{rol})
+    await UsuarioEditarDatos.save()
+    res.json({
+        "msg":'Actualizacion realizada con exito'
+    })
+}
 // modificar model
 const usuarioPutActivar=async(req,res)=>{
     const {id}=req.params
@@ -170,4 +178,4 @@ const usuarioPutDesactivar=async(req,res)=>{
         "msg":"Usuario activado con exito"
     })
 }
-export{usuarioPost,mostrarFoto,usuarioPutFoto,usuarioPutdatos,usuarioPutActivar,usuarioGetListarid,usuarioLogin,usuarioGetListarTodos,usuarioPutDesactivar,usuarioGetListarNombreOEmail}
+export{usuarioPost,mostrarFoto,usuarioPutRol,usuarioPutFoto,usuarioPutdatos,usuarioPutActivar,usuarioGetListarid,usuarioLogin,usuarioGetListarTodos,usuarioPutDesactivar,usuarioGetListarNombreOEmail}
