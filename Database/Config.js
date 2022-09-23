@@ -8,4 +8,4 @@ const bdconectar= async()=>{
         throw new Error("Error al iniciar la base de datos")
     }
 }   
-export { bdconectar }
+export { bdconectar } 
